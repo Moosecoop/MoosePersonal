@@ -1,5 +1,9 @@
 const Discord = require('discord.js'); //loads discord.js package
 const client = new Discord.Client(); //creates client
+const config = require('./config.json'); //loads config
+
+
+client.login(config.token);
 
 client.on("message", message => {
   if(message.author !== client.user) return;
@@ -24,6 +28,7 @@ client.on("message", message => {
       // Has to delete messages individually. Cannot use `deleteMessages()` on selfclients.
       msg_array.map(m => m.delete().catch(console.error));
    });
+
  } else if(message.content.startsWith(prefix+"eval")) {
     try {
       var code = params.join(" ");
